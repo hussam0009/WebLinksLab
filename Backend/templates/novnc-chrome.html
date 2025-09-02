@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/novnc-chrome.css') }}">
+</head>
+<body>
+    <div class="loader-container">
+        <div class="progress-loader"></div>
+        <div class="status-message">
+            <h1 class="status-title">Initializing Environment</h1>
+            <p class="status-subtitle">
+                Preparing your secure container. This usually takes 15-30 seconds.
+                <br>
+                <small>Please keep this tab open...</small>
+            </p>
+        </div>
+    </div>
+
+    {% if is_iframe %}
+    <script>
+        setTimeout(function() {
+            window.open("{{ url }}", "_blank");
+            document.querySelector('.loader-container').innerHTML = `
+                <div class="status-message">
+                    <h1 class="status-title">Redirecting...</h1>
+                    <p class="status-subtitle">Your environment is ready! Opening in new tab.</p>
+                </div>
+            `;
+            setTimeout(() => window.close(), 1000);
+        }, 5000);
+    </script>
+    {% else %}
+    <script>
+        setTimeout(function() {
+            document.body.style.background = '#fff';
+            document.querySelector('.loader-container').remove();
+            
+            var iframe = document.createElement('iframe');
+            iframe.src = "{{ url }}";
+            iframe.style.cssText = `
+                width: 100vw; 
+                height: 100vh; 
+                border: none;
+                opacity: 0;
+                transition: opacity 0.5s ease-in;
+            `;
+            
+            document.body.appendChild(iframe);
+            
+            // Smooth fade-in effect
+            setTimeout(() => iframe.style.opacity = '1', 100);
+        }, 5000);
+    </script>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,226 @@
+ /* Base Styles */
+ :root {
+    --primary: #4361ee;
+    --secondary: #3f37c9;
+    --accent: #4895ef;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --success: #4cc9f0;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 2rem;
+    background: #f1f5f9;
+    color: var(--dark);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+h1 {
+    color: var(--dark);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+h1 span.username {
+    color: var(--primary);
+    position: relative;
+}
+
+/* Stats Cards */
+.history-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.history-count {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.history-count:hover {
+    transform: translateY(-2px);
+}
+
+.history-count span {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* History Sections */
+.history-box {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.history-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 1.25rem 1.5rem;
+    background: var(--light);
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.history-item {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-item:hover {
+    background: #f8f9fa;
+}
+
+.history-url {
+    font-weight: 500;
+    color: var(--dark);
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.timestamp-container {
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Links/Buttons */
+.links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.links a {
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.links a[href*="scan_url"] {
+    background: var(--primary);
+    color: white;
+}
+
+.links a[href*="logout"] {
+    background: #e9ecef;
+    color: var(--dark);
+}
+
+.links a[href*="venv"] {
+    background: var(--success);
+    color: white;
+}
+
+.links a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Empty States */
+.no-history {
+    padding: 2rem;
+    text-align: center;
+    color: #adb5bd;
+    font-style: italic;
+}
+.delete-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 15px;
+    transition: background 0.2s;
+}
+
+.delete-btn:hover {
+    background: #cc0000;
+}
+
+.delete-form {
+    display: inline-block;
+}
+
+.history-url {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+/* Icons */
+svg {
+    flex-shrink: 0;
+}
+
+.success-toast {
+position: fixed;
+top: 20px;
+right: 20px;
+background: #4CAF50;
+color: white;
+padding: 15px;
+border-radius: 4px;
+z-index: 1000;
+box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.success-toast.show {
+    opacity: 1;
+}
+
+/* Make sure nothing overflows */
+html, body {
+width: 100%;
+overflow-x: hidden;
+}
+
+/* Fix for iframe-specific scaling issues */
+iframe {
+width: 100%;
+height: 100%;
+transform: scale(1);
+transform-origin: top left;
+}

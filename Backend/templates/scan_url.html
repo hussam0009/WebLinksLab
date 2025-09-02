@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Scanner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/scan_url.css') }}">
+</head>
+<body>
+    <div class="loader-container" id="loader">
+        <div class="progress-loader"></div>
+        <div class="loading-text">Analyzing URL...</div>
+    </div>
+
+    <div class="container">
+        <h1>URL Security Scanner</h1>
+        
+        <form method="POST" id="scanForm">
+            <div class="form-group">
+                <input type="url" name="url" 
+                       placeholder="Enter URL to scan (e.g., https://example.com)"
+                       value="{{ scanned_url if scanned_url else '' }}" required>
+            </div>
+            <button type="submit" id="scanButton">Scan Now</button>
+        </form>
+
+        {% if error %}
+            <div class="error animate-error">{{ error }}</div>
+        {% endif %}
+
+        {% if result %}
+            <div class="result-box">
+                <h3>Scan Results for: {{ scanned_url }}</h3>
+                <div class="stat-item malicious">Malicious: {{ result.malicious }}</div>
+                <div class="stat-item malicious">Suspicious: {{ result.suspicious }}</div>
+                <div class="stat-item">Undetected: {{ result.undetected }}</div>
+                <div class="stat-item safe">Harmless: {{ result.harmless }}</div>
+                <div class="stat-item">Timeout: {{ result.timeout }}</div>
+            </div>
+        {% endif %}
+
+        {% if history %}
+            <div class="history-box">
+                <div class="history-title">Your Scan History</div>
+                {% for entry in history %}
+                    <div class="history-item" style="animation-delay: {{ loop.index * 0.1 }}s;">
+                        <div class="history-url">{{ entry.description.split(': ')[1] }}</div>
+                        <div class="history-time">{{ entry.timestamp | datetimeformat }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById('scanForm').addEventListener('submit', function(e) {
+            const loader = document.getElementById('loader');
+            const button = document.getElementById('scanButton');
+            
+            // Show loader
+            loader.style.display = 'flex';
+            
+            // Disable button
+            button.disabled = true;
+            button.innerHTML = 'Scanning...';
+            
+            // Optional: Add slight delay before form submission
+            setTimeout(() => {
+                e.target.submit();
+            }, 300);
+        });
+
+        // Animate error message if present
+        const errorMessage = document.querySelector('.error');
+        if (errorMessage) {
+            setTimeout(() => {
+                errorMessage.style.opacity = '1';
+                errorMessage.style.transform = 'translateY(0)';
+            }, 100);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "WebLink labs",
+  "version": "1.0",
+  "description": "Feel free to test any url on our secure environment",
+  "permissions": ["storage", "activeTab", "tabs", "cookies", "sessionStorage"],
+  "host_permissions": [
+    "http://127.0.0.1:80/*",
+    "http://192.168.1.8:*/*"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/icon.svg"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://127.0.0.1:80/*"],  
+      "js": ["content-script.js"],
+      "all_frames": true  
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["options/options.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

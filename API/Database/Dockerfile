@@ -1,0 +1,7 @@
+FROM mysql:8.0
+
+ENV MYSQL_ROOT_PASSWORD=HdzcfzkWFT@@gF=eb5&Yw
+ENV MYSQL_DATABASE=weblinklabsdb
+
+EXPOSE 3306
+

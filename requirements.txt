@@ -1,0 +1,14 @@
+Flask==3.1.0
+requests==2.32.3
+python-dotenv==1.1.0
+fastapi==0.115.12
+pydantic==2.11.2
+PyJWT==2.10.1
+passlib==1.7.4
+httpx==0.28.1
+uvicorn==0.34.0
+bcrypt==3.2.0
+cryptography==44.0.2
+python-multipart
+mysql-connector-python
+typing
